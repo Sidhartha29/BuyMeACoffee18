@@ -5,28 +5,6 @@ Deployed easily on **Netlify** or any static hosting provider.
 
 ---
 
-## 📂 Project Structure
-
-project/
-├── src/ # React source code
-│ ├── components/ # UI components (Layout, Post, etc.)
-│ ├── contexts/ # React Contexts (AuthContext)
-│ ├── hooks/ # Custom hooks (usePosts, useMessages, etc.)
-│ ├── pages/ # Application pages (Home, Profile, Auth, etc.)
-│ ├── types/ # TypeScript types
-│ ├── App.tsx # Root component
-│ └── main.tsx # App entry point
-│
-├── index.html # HTML entry point
-├── vite.config.ts # Vite configuration
-├── tailwind.config.js
-├── postcss.config.js
-├── tsconfig.json
-├── package.json
-└── README.md
-
----
-
 ## 🛠 Tech Stack
 
 - **React 18** (with TypeScript)
