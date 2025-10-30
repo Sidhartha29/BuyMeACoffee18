@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { useAuth } from '../contexts/AuthContext';
 import { usePosts } from '../hooks/usePosts';
-import PostCard from '../components/Post/PostCard';
-import CreatePost from '../components/Post/CreatePost';
+import PostCard from '../components/Post/ImageCard';
+import CreatePost from '../components/Post/SellImage';
 import { PlusCircle, Coffee, Music, Star, Users } from 'lucide-react';
 
 const Home: React.FC = () => {

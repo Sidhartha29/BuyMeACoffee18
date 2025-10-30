@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 import { usePosts } from '../hooks/usePosts';
-import PostCard from '../components/Post/PostCard';
-import CreatePost from '../components/Post/CreatePost';
+import PostCard from '../components/Post/ImageCard';
+import CreatePost from '../components/Post/SellImage';
 import { 
   Calendar, 
   MapPin, 

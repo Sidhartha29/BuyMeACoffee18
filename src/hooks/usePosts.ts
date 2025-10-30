@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Post } from '../types';
+import { Post, CreatePostData } from '../types';
 
 // Mock data for demonstration
 const mockPosts: Post[] = [
@@ -89,17 +89,17 @@ export const usePosts = (userId?: string, type: 'home' | 'explore' | 'profile' =
     const fetchPosts = async () => {
       setIsLoading(true);
       setError(null);
-      
+
       try {
         // Simulate API call
         await new Promise(resolve => setTimeout(resolve, 500));
-        
+
         let filteredPosts = mockPosts;
-        
+
         if (type === 'profile' && userId) {
           filteredPosts = mockPosts.filter(post => post.author.id === userId);
         }
-        
+
         setPosts(filteredPosts);
       } catch (err) {
         setError('Failed to fetch posts');
@@ -112,10 +112,10 @@ export const usePosts = (userId?: string, type: 'home' | 'explore' | 'profile' =
   }, [userId, type]);
 
   const likePost = async (postId: string) => {
-    setPosts(prev => prev.map(post => 
-      post.id === postId 
-        ? { 
-            ...post, 
+    setPosts(prev => prev.map(post =>
+      post.id === postId
+        ? {
+            ...post,
             isLiked: !post.isLiked,
             likesCount: post.isLiked ? post.likesCount - 1 : post.likesCount + 1
           }
@@ -123,10 +123,9 @@ export const usePosts = (userId?: string, type: 'home' | 'explore' | 'profile' =
     ));
   };
 
-  const createPost = async (postData: any) => {
+  const createPost = async (postData: CreatePostData) => {
     const newPost: Post = {
       id: Date.now().toString(),
-      type: postData.type,
       author: {
         id: '1',
         username: 'johndoe',
@@ -138,16 +137,24 @@ export const usePosts = (userId?: string, type: 'home' | 'explore' | 'profile' =
         postsCount: 90,
         joinedAt: new Date('2023-01-15'),
       },
-      content: postData.content,
       createdAt: new Date(),
       updatedAt: new Date(),
       likesCount: 0,
       commentsCount: 0,
       sharesCount: 0,
       isLiked: false,
-      ...postData,
+      type: postData.type,
+      content: postData.content,
+      rating: postData.rating,
+      reviewTitle: postData.reviewTitle,
+      reviewImage: postData.reviewImage ? URL.createObjectURL(postData.reviewImage) : undefined,
+      songTitle: postData.songTitle,
+      songArtist: postData.songArtist,
+      songUrl: postData.songUrl,
+      songThumbnail: postData.songThumbnail,
+      songDuration: postData.songDuration,
     };
-    
+
     setPosts(prev => [newPost, ...prev]);
     return newPost;
   };

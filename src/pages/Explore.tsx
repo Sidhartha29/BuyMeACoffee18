@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { usePosts } from '../hooks/usePosts';
-import PostCard from '../components/Post/PostCard';
+import PostCard from '../components/Post/ImageCard';
 import { Search, Filter, TrendingUp, Users, Music, Star } from 'lucide-react';
 
 const Explore: React.FC = () => {

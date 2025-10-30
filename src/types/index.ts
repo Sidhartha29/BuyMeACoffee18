@@ -27,12 +27,12 @@ export interface Post {
   commentsCount: number;
   sharesCount: number;
   isLiked?: boolean;
-  
+
   // Review-specific fields
   rating?: number;
   reviewTitle?: string;
   reviewImage?: string;
-  
+
   // Song-specific fields
   songTitle?: string;
   songArtist?: string;
@@ -65,7 +65,24 @@ export interface CreatePostData {
   songArtist?: string;
   songFile?: File;
   songUrl?: string;
+  songThumbnail?: string;
+  songDuration?: number;
 }
+
+export interface SignupData {
+  username: string;
+  displayName?: string;
+  email: string;
+  password: string;
+  bio?: string;
+  location?: string;
+  website?: string;
+  role?: 'photographer' | 'buyer';
+  socialLinks?: Record<string, string>;
+  equipment?: string[];
+  specialties?: string[];
+}
+
 export interface Notification {
   id: string;
   type: 'like' | 'comment' | 'follow' | 'mention';
@@ -84,6 +101,13 @@ export interface Message {
   content: string;
   createdAt: Date;
   isRead: boolean;
+  type: 'text' | 'image' | 'system';
+  imageReference?: {
+    id: string;
+    title: string;
+    thumbnail: string;
+    price: number;
+  };
 }
 
 export interface Conversation {
@@ -91,4 +115,5 @@ export interface Conversation {
   participants: User[];
   lastMessage: Message;
   updatedAt: Date;
+  context?: 'image_inquiry' | 'commercial_license' | 'bulk_purchase' | 'photographer_chat' | 'general';
 }

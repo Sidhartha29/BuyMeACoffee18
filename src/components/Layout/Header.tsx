@@ -12,10 +12,11 @@ import {
   LogOut, 
   Menu, 
   X,
-  Coffee,
+  Image,
   Home,
   Compass,
-  PlusCircle
+  PlusCircle,
+  ShoppingCart
 } from 'lucide-react';
 
 const Header: React.FC = () => {
@@ -43,9 +44,9 @@ const Header: React.FC = () => {
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-2">
             <div className="w-8 h-8 bg-primary-500 rounded-lg flex items-center justify-center">
-              <Coffee className="w-5 h-5 text-gray-900" />
+              <Image className="w-5 h-5 text-gray-900" />
             </div>
-            <span className="text-xl font-bold text-gray-900 hidden sm:block">CoffeeShare</span>
+            <span className="text-xl font-bold text-gray-900 hidden sm:block">PixelMarket</span>
           </Link>
 
           {/* Desktop Navigation */}
@@ -59,9 +60,9 @@ const Header: React.FC = () => {
               <span>Explore</span>
             </Link>
             {isAuthenticated && (
-              <Link to="/create" className="flex items-center space-x-1 text-gray-700 hover:text-primary-600 transition-colors">
+              <Link to="/sell" className="flex items-center space-x-1 text-gray-700 hover:text-primary-600 transition-colors">
                 <PlusCircle className="w-5 h-5" />
-                <span>Create</span>
+                <span>Sell Image</span>
               </Link>
             )}
           </nav>
@@ -72,7 +73,7 @@ const Header: React.FC = () => {
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
               <input
                 type="text"
-                placeholder="Search creators, posts..."
+                placeholder="Search images, categories, photographers..."
                 className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-full focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors"
               />
             </div>
@@ -82,6 +83,15 @@ const Header: React.FC = () => {
           <div className="hidden md:flex items-center space-x-4">
             {isAuthenticated ? (
               <>
+                {/* Shopping Cart */}
+                <Link
+                  to="/cart"
+                  className="p-2 text-gray-600 hover:text-primary-600 hover:bg-gray-100 rounded-full transition-colors relative"
+                >
+                  <ShoppingCart className="w-5 h-5" />
+                  {/* You can add cart item count here later */}
+                </Link>
+                
                 <Link
                   to="/notifications"
                   className="p-2 text-gray-600 hover:text-primary-600 hover:bg-gray-100 rounded-full transition-colors relative"
@@ -127,6 +137,22 @@ const Header: React.FC = () => {
                       >
                         <User className="w-4 h-4" />
                         <span>Profile</span>
+                      </Link>
+                      <Link
+                        to="/my-images"
+                        className="flex items-center space-x-2 px-4 py-2 text-gray-700 hover:bg-gray-100 transition-colors"
+                        onClick={() => setIsProfileMenuOpen(false)}
+                      >
+                        <Image className="w-4 h-4" />
+                        <span>My Images</span>
+                      </Link>
+                      <Link
+                        to="/purchases"
+                        className="flex items-center space-x-2 px-4 py-2 text-gray-700 hover:bg-gray-100 transition-colors"
+                        onClick={() => setIsProfileMenuOpen(false)}
+                      >
+                        <ShoppingCart className="w-4 h-4" />
+                        <span>Purchases</span>
                       </Link>
                       <Link
                         to="/settings"
@@ -184,7 +210,7 @@ const Header: React.FC = () => {
                   <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
                   <input
                     type="text"
-                    placeholder="Search creators, posts..."
+                    placeholder="Search images, categories, photographers..."
                     className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-full focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
                   />
                 </div>
@@ -209,14 +235,24 @@ const Header: React.FC = () => {
                   <span>Explore</span>
                 </Link>
                 {isAuthenticated && (
-                  <Link 
-                    to="/create" 
-                    className="flex items-center space-x-3 px-2 py-2 text-gray-700 hover:text-primary-600 hover:bg-gray-50 rounded-lg transition-colors"
-                    onClick={() => setIsMenuOpen(false)}
-                  >
-                    <PlusCircle className="w-5 h-5" />
-                    <span>Create Post</span>
-                  </Link>
+                  <>
+                    <Link 
+                      to="/sell" 
+                      className="flex items-center space-x-3 px-2 py-2 text-gray-700 hover:text-primary-600 hover:bg-gray-50 rounded-lg transition-colors"
+                      onClick={() => setIsMenuOpen(false)}
+                    >
+                      <PlusCircle className="w-5 h-5" />
+                      <span>Sell Image</span>
+                    </Link>
+                    <Link 
+                      to="/cart" 
+                      className="flex items-center space-x-3 px-2 py-2 text-gray-700 hover:text-primary-600 hover:bg-gray-50 rounded-lg transition-colors"
+                      onClick={() => setIsMenuOpen(false)}
+                    >
+                      <ShoppingCart className="w-5 h-5" />
+                      <span>Cart</span>
+                    </Link>
+                  </>
                 )}
               </nav>
 
@@ -234,6 +270,22 @@ const Header: React.FC = () => {
                       className="w-6 h-6 rounded-full object-cover"
                     />
                     <span>{user?.displayName}</span>
+                  </Link>
+                  <Link
+                    to="/my-images"
+                    className="flex items-center space-x-3 px-2 py-2 text-gray-700 hover:text-primary-600 hover:bg-gray-50 rounded-lg transition-colors"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    <Image className="w-5 h-5" />
+                    <span>My Images</span>
+                  </Link>
+                  <Link
+                    to="/purchases"
+                    className="flex items-center space-x-3 px-2 py-2 text-gray-700 hover:text-primary-600 hover:bg-gray-50 rounded-lg transition-colors"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    <ShoppingCart className="w-5 h-5" />
+                    <span>Purchases</span>
                   </Link>
                   <Link
                     to="/settings"
